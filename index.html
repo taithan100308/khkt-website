@@ -198,9 +198,6 @@
         <a href = "comunity.html" style="font-family: Times New Roman, Times, serif;" class="text-xl">Cộng đồng</a>
         <a href="tuyenSinh.html" style="font-family: Times New Roman, Times, serif;" class="text-xl">Thông tin tuyển sinh</a>
         <a href="toHopMon.jpg" class="text-xl" style="font-family: Times New Roman, Times, serif;" >Tổ hợp môn</a>
-        <div>
-          <img src="news.jpg" class="w-7">
-        </div>
         <div class="dropdown">
           <span style="font-family: Times New Roman, Times, serif;" class="text-xl">Tự luyện</span>
           <div class="dropdown-content">
@@ -274,7 +271,14 @@
     <img src="loading.png" alt="Loading" class="w-full h-16"> <!-- Adjust width and height as needed -->
   </div>
 
-  <p class="font-extrabold text-3xl ml-9 mt-0 mb-7" style = "font-family: Times New Roman, Times, serif;">Tin tức</p>
+
+<div class="flex items-center mb-9">
+  <img src="news.jpg" class="ml-9 w-6">
+  <p class="font-extrabold text-3xl ml-2" style="font-family: Times New Roman, Times, serif;">
+    Tin tức
+  </p>
+</div>
+
 
   <div class="grid grid-cols-2 gap-8 px-8 mb-8">
     <!-- News Item 1 -->
@@ -324,15 +328,15 @@
     <h2 class="text-lg font-semibold">NHỮNG CON SỐ THỐNG KÊ</h2>
     <div class="grid grid-cols-3 gap-4 mt-4">
       <div>
-        <h3 class="text-2xl font-bold text-black">34</h3>
+        <h3 class="text-2xl font-bold text-black">35</h3>
         <p class="text-gray-600">Số lượng người đã truy cập</p>
       </div>
       <div>
-        <h3 class="text-2xl font-bold text-black">2</h3>
-        <p class="text-gray-600">Số lượng người đang truy cập</p>
+        <h3 class="text-2xl font-bold text-black">11</h3>
+        <p class="text-gray-600">Số lượng người đã truy cập trong tháng</p>
       </div>
       <div>
-        <h3 class="text-2xl font-bold text-black">2546</h3>
+        <h3 class="text-2xl font-bold text-black">3</h3>
         <p class="text-gray-600">Số lượng người đang truy cập</p>
       </div>
     </div>
@@ -355,6 +359,40 @@
       </form>
     </div>
   </div>
+
+  <footer class="bg-[#14295E] text-white py-12">
+    <div class="container mx-auto px-8">
+      <!-- Logo and Contact Info -->
+      <div class="grid grid-cols-4 gap-8">
+        <!-- Column 1: Logo and Contact -->
+        <div class="col-span-1">
+          <div class="mb-4">
+            <div class="flex items-center justify-center"> <!-- Center the logo and Edu4u -->
+              <div class="relative flex flex-col items-center mr-4">
+                <img src="Edu.svg.svg" alt="Logo" class="w-12">
+              </div>
+              <div class="font-bold text-xl mt-1" style="font-family: Times New Roman, Times, serif;">Edu4u</div> <!-- Edu4u text -->
+            </div>
+            <p class="text-lg font-semibold text-white leading-tight mt-1 text-center" style="font-family: Times New Roman, Times, serif;"> <!-- Centered slogan -->
+              Đổi mới sáng tạo, nâng cao chất lượng, đoàn kết kỳ cương
+            </p>
+          </div>
+        
+          <div class="flex flex-col mt-9"> <!-- Flex column for additional content -->
+            <div class=" text-white text-sm" style="font-family: Times New Roman, Times, serif;"> <!-- Example content -->
+              <p class="mb-2">THPT chuyên Lý Tự Trọng - Phường Hưng Thạnh, Quận Cái Răng, TP. Cần Thơ</p>
+              <p class="mb-2">Điện thoại: 0292.3821.428</p>
+              <p class="mb-2">THPT Châu Văn Liêm - 58 Ngô Quyền, An Cư, Quận Ninh Kiều, TP. Cần Thơ</p>
+              <p class="mb-2">Điện thoại: 0292.382.1330</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+
+  </footer>
 
   <script>
      const toggleChat = document.getElementById('toggle-chat');
