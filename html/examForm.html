@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Form</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /*
+        .red-border {
+            border: 1px solid red;
+            padding: 8px;
+        }
+        .question-column {
+        border: 1px solid red;
+        padding: 8px;
+        }
+        .answer-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        }
+        .question-box {
+            @apply p-2;
+        }
+        .circle {
+        width: 12px;
+        height: 12px;
+        border: 1px solid black;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 8px; 
+        }
+        .circle-container {
+            display: flex;
+        }
+        .circle-row {
+            display: flex;
+            align-items: center;
+            height: 20px; 
+        }
+        .circle-row + .circle-row {
+            margin-top: 4px; 
+        }
+        .answer-row {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+        }
+        .number {
+            width: 15px;
+            text-align: right;
+            margin-right: 8px; 
+        }
+        .grid-container {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 16px;
+        }
+        @media (max-width: 1200px) {
+        .grid-container {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    @media (max-width: 900px) {
+        .grid-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media (max-width: 600px) {
+        .grid-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 400px) {
+        .grid-container {
+            grid-template-columns: 1fr;
+        }
+    }
+        */
+        body {
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .left-half, .right-half {
+            flex: 1;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .left-half {
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .right-half {
+            overflow-y: auto;
+        }
+        .upload-container {
+            text-align: center;
+        }
+        .upload-container input[type="file"] {
+            display: none;
+        }
+        .upload-container label {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 16px;
+        }
+        .question-column {
+            border: 1px solid #e0dddd;
+            padding: 8px;
+        }
+        .circle {
+            width: 12px;
+            height: 12px;
+            border: 1px solid black;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 4px;
+        }
+        .answer-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+        .number {
+            width: 15px;
+            text-align: right;
+            margin-right: 8px;
+        }
+        .circle-container {
+            display: flex;
+        }
+        @media (max-width: 1200px) {
+            .grid-container {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        @media (max-width: 900px) {
+            .grid-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 400px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .go-back-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 32px;
+            z-index: 1001;
+        }
+        .timer {
+            background-color: #208c3a;
+            padding: 8px 16px;
+            border-radius: 32px;
+            font-weight: bold;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1001;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            height: 100%;
+        }
+        .navbar {
+            background-color: #ffffff;
+            color: white;
+            padding: 10px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            height: 60px;
+            box-sizing: border-box;
+        }
+        .content {
+        display: flex;
+        height: calc(100% - 60px);
+        margin-top: 60px;
+        }
+        .left-half, .right-half {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .left-half {
+            border-right: 1px solid #ccc;
+        }
+        .upload-container {
+            margin-bottom: 20px;
+        }
+        .right-half {
+        overflow-y: auto;
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
+        .navbar-spacer {
+            width: 100px;
+        }
+        .submit-button {
+        background-color: #208c3a;
+        padding: 8px;
+        padding-right:16px;
+        padding-left:16px;
+        border-radius: 32px;
+        }
+        #phan1 table {
+        border-collapse: collapse;
+        }
+
+        #phan1 th, #phan1 td {
+            border: 1px solid #e0dddd;
+            padding: 4px;
+            text-align: center;
+        }
+
+        #phan1 input[type="radio"] {
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            #phan1 table {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            #phan1 table {
+                font-size: 0.6rem;
+            }
+        }
+
+
+
+    </style>
+</head>
+
+<body class="bg-gray-100 p-8">
+
+    <nav class="navbar">
+        <button class="go-back-button"><a href="homePage.html">Go Back</a></button>
+        <div id="timer" class="timer">60:00</div>
+        <div class="navbar-spacer"></div>
+        <button class="submit-button">Submit</button>
+    </nav>
+
+    <div class="content">
+        <div class="left-half">
+            <div class="upload-container">
+                <h2>Upload Test Image</h2>
+                <input type="file" id="file-upload" />
+                <label for="file-upload">Choose File</label>
+            </div>
+
+        </div>
+        <div class="right-half">
+            <h2 class="text-xl font-bold mb-4">PHẦN I</h2>
+            <div id="phan1" class="flex flex-nowrap overflow-x-auto">
+                <!-- JavaScript will populate this section -->
+            </div>
+            <h2 class="text-xl font-bold mb-4">PHẦN II</h2>
+            <div id="phan2" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- JavaScript will populate this section -->
+            </div>
+            <h2 class="text-xl font-bold mb-4">PHẦN III</h2>
+            <div id="phan3" class="grid-container">
+                <!-- JavaScript will populate this section -->
+            </div>
+        </div>
+        <div class="fixed bottom-0 left-0 right-0 bg-white shadow-md p-4">
+            <div class="flex justify-between items-center max-w-6xl mx-auto">
+                <div class="flex-1 border rounded-full p-2 mx-1">
+                    <div class="text-center">
+                        <span class="font-bold text-sm">Phần I: 0/40</span>
+                    </div>
+                </div>
+                <div class="flex-1 border rounded-full p-2 mx-1">
+                    <div class="text-center">
+                        <span class="font-bold text-sm">Phần II: 0/16</span>
+                    </div>
+                </div>
+                <div class="flex-1 border rounded-full p-2 mx-1">
+                    <div class="text-center">
+                        <span class="font-bold text-sm">Phần III: 0/6</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    <script>
+
+        //Phần II
+        const phan2 = document.getElementById('phan2');
+    for (let i = 1; i <= 4; i++) {
+        let column = `
+            <div class="border border-gray-300 p-4">
+                <div class="mb-4">
+                    <h3 class="font-semibold mb-2">Câu ${i * 2 - 1}</h3>
+                    ${createQuestionCircles(i * 2 - 1)}
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-2">Câu ${i * 2}</h3>
+                    ${createQuestionCircles(i * 2)}
+                </div>
+            </div>
+        `;
+        phan2.innerHTML += column;
+    }
+
+    function createQuestionCircles(questionNumber) {
+        let rows = '';
+        ['a', 'b', 'c', 'd'].forEach(letter => {
+            rows += `
+                <div class="flex items-center mb-2">
+                    <span class="w-6 text-right mr-2">${letter})</span>
+                    <div class="flex">
+                        <div class="w-6 h-6 border border-gray-400 rounded-full mr-2 cursor-pointer" onclick="toggleCircle(this, ${questionNumber}, '${letter}', 1)"></div>
+                        <div class="w-6 h-6 border border-gray-400 rounded-full cursor-pointer" onclick="toggleCircle(this, ${questionNumber}, '${letter}', 2)"></div>
+                    </div>
+                </div>
+            `;
+        });
+        return rows;
+    }
+
+        //Phần III
+        const phan3 = document.getElementById('phan3');
+    for (let i = 1; i <= 6; i++) {
+        let column = `
+            <div class="question-column">
+                <h3 class="font-semibold mb-2">Câu ${i}</h3>
+                <div class="w-full mb-4">
+                    <input type="text" class="w-full border border-gray-300 p-1" maxlength="5">
+                </div>
+                <div class="answer-row">
+                    <span class="number">-</span>
+                    <div class="circle-container">
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, '-', 1)"></div>
+                    </div>
+                </div>
+                <div class="answer-row">
+                    <span class="number">,</span>
+                    <div class="circle-container">
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ',', 1)"></div>
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ',', 2)"></div>
+                    </div>
+                </div>
+        `;
+        for (let j = 0; j < 6; j++) {
+            column += `
+                <div class="answer-row">
+                    <span class="number">${j}</span>
+                    <div class="circle-container">
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ${j}, 1)"></div>
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ${j}, 2)"></div>
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ${j}, 3)"></div>
+                        <div class="circle cursor-pointer" onclick="toggleCircle(this, ${i}, ${j}, 4)"></div>
+                    </div>
+                </div>
+            `;
+        }
+        column += '</div>';
+        phan3.innerHTML += column;
+    }
+
+    //Phan I
+    const phan1 = document.getElementById('phan1');
+    for (let column = 0; column < 4; column++) {
+        let columnHtml = `
+            <div class="flex-shrink-0 w-1/4 px-1">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="w-1/5 border border-red-500 p-1">Câu</th>
+                            <th class="w-1/5 border border-red-500 p-1">A</th>
+                            <th class="w-1/5 border border-red-500 p-1">B</th>
+                            <th class="w-1/5 border border-red-500 p-1">C</th>
+                            <th class="w-1/5 border border-red-500 p-1">D</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+        `;
+        
+        for (let i = 1; i <= 10; i++) {
+            let questionNumber = column * 10 + i;
+            columnHtml += `
+                <tr>
+                    <td class="border border-red-500 p-1 text-center">${questionNumber}</td>
+                    <td class="border border-red-500 p-1 text-center"><input type="radio" name="q${questionNumber}" value="A"></td>
+                    <td class="border border-red-500 p-1 text-center"><input type="radio" name="q${questionNumber}" value="B"></td>
+                    <td class="border border-red-500 p-1 text-center"><input type="radio" name="q${questionNumber}" value="C"></td>
+                    <td class="border border-red-500 p-1 text-center"><input type="radio" name="q${questionNumber}" value="D"></td>
+                </tr>
+            `;
+        }
+        
+        columnHtml += `
+                    </tbody>
+                </table>
+            </div>
+        `;
+        phan1.innerHTML += columnHtml;
+    }
+
+    function toggleCircle(circle, questionNumber, option, position) {
+        const row = circle.closest('.answer-row') || circle.closest('.flex');
+        row.querySelectorAll('.circle, [class*="rounded-full"]').forEach(c => c.classList.remove('bg-black'));
+        
+        circle.classList.toggle('bg-black');
+        
+        console.log(`Question ${questionNumber}, Option ${option}, Position ${position} selected`);
+    }
+
+
+
+
+    </script>
+</body>
+</html>
