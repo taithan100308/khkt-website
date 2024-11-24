@@ -3,168 +3,495 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Featured Article UI</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HOME</title>
+
+ <!-- Google Fonts: Playfair Display and Poppins -->
+ <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* General Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: #fff;
-      padding-top: 80px;
-      display: flex;
-      justify-content: center;
-    }
-
-    /* Navigation Bar */
-    .nav {
-    width: calc(100% - 40px); /* Adjust to leave space */
-    max-width: 1200px; /* Optional: Align it with the container */
-    margin: 0 auto; /* Center it horizontally */
-    background-color: #111;
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 2px solid #888;
-    align-items: center;
-    }
-
-    .nav a {
-    display: flex; /* Ensure proper alignment for logo and text */
-    align-items: center;
-    color: #fff;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 16px;
-    }
-
-    /* Main Container */
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      width: 100%;
-      max-width: 1200px;
-      gap: 20px;
-      margin: 20px auto;
-      justify-content: center;
-    }
-
-    /* Featured Article Section with Text Overlay */
-    .featured-article {
-      flex: 2;
-      position: relative;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .featured-article img {
-    width: auto; /* Automatically adjust width */
-    height: auto; /* Maintain aspect ratio */
-    max-width: 110%; /* Increase image size by 10%, relative to its container */
-    max-height: 110%; /* Scale height proportionally */
-    object-fit: contain; /* Ensure the entire content is visible */
-    margin: auto; /* Center the image inside the container */
-    }
-
-    .featured-article .overlay-text {
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 500px;
+  }
+  .carousel-image {
+    position: absolute;
+    width: 100%;
+    height: 500px;
+    transition: transform 0.5s ease-in-out;
+  }
+    .staircase {
       position: absolute;
-      top: 50%; /* Center text vertically */
-      left: 50%; /* Center text horizontally */
+      top: 50%;
+      left: 50%;
+      transform: translate(-90%, -30%);
+      z-index: 0;
+      opacity: 0.6;
+    }
+    .door {
+      position: absolute;
+      top: 30%;
+      left: 50%;
       transform: translate(-50%, -50%);
-      color: #fff;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-      padding: 10px 20px;
-      border-radius: 5px;
+      z-index: 1;
     }
-
-    /* Sidebar Articles */
-    .sidebar {
-      flex: 1;
+    .welcome-text {
+      margin-top: -30px;
+    }
+    .welcome-heading {
+      font-family: 'Playfair Display', serif;
+    }
+    .notification-dropdown {
+      display: none;
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      width: 360px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 100;
+    }
+    .notification-item {
+      padding: 12px;
+      border-bottom: 1px solid #f0f0f0;
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
     }
-
-    .sidebar .article {
-      background: #111;
-      padding: 10px 15px;
-      border-radius: 5px;
-      transition: background 0.3s ease;
-      border-bottom: 1px solid #888;
+    .notification-item:last-child {
+      border-bottom: none;
     }
-
-    .sidebar .article:hover {
-      background: #111;
+    .notification-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 12px;
     }
-
-    .sidebar .article h3 {
-      font-size: 16px;
-      margin-bottom: 5px;
+    .notification-content {
+      flex: 1;
     }
-
-    .sidebar .article span {
-      font-size: 12px;
-      color: #888;
+    .notification-time {
+      font-size: 0.8rem;
+      color: #65676B;
     }
-    .logo {
-    height: 40px; /* Adjust the height as needed */
-    width: auto; /* Maintain aspect ratio */
-    margin-left: 15px; /* Add some spacing from the edge */
+    .dropdown {
+      position: relative;
+      display: inline-block;
     }
-    a, a:visited, a:hover, a:active {
-      color: #fff !important; /* Ensure links are always white */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 0;
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
       text-decoration: none;
+      display: block;
     }
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+    .user-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding: 8px 0;
+    border: 1px solid #e5e7eb;
+  }
+
+  .group:hover .user-dropdown {
+    display: block;
+  }
+
+  .user-dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 16px;
+    color: #1f2937;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  .user-dropdown-item:hover {
+    background-color: #f3f4f6;
+  }
+
+  .user-dropdown-item:not(:last-child) {
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .dropdown {
+      position: relative;
+      display: inline-block;
+  }
+  .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+  }
+  .dropdown:hover .dropdown-content {
+      display: block;
+  }
+  .class-option {
+      position: relative;
+  }
+  .hover-content {
+      display: none;
+      position: absolute;
+      left: 100%;
+      top: 0;
+      background-color: #f1f1f1;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 2;
+  }
+  .class-option:hover .hover-content {
+      display: block;
+  }
+  .hover-content span {
+      display: block;
+      padding: 12px 16px;
+  }
+  .hover-content span:first-child {
+      border-bottom: 1px solid #ddd;
+  }
+
+
+
   </style>
 </head>
-<body>
-  <!-- Navigation -->
-  <div class="nav">
-    <a href="#">
-      <img src="logo.jpg" alt="Logo" class="logo">
-    </a>
-    <a href="homePage.html">Trang chủ</a>
+
+<body class="bg-white min-h-screen relative">
+  <nav class="bg-white py-3 px-8 flex justify-between items-center border-b-2 border-gray-300">
+    <div class="flex items-center">
+      <div class="w-12 mr-2"> <!-- Added margin to the right for spacing -->
+        <img src="Edu.svg.svg" alt="Edu Logo"> <!-- Changed <image> to <img> -->
+      </div>
+      <div class="font-bold text-2xl text-black" style="font-family: Times New Roman, Times, serif;">Edu4u</div>
+    </div>
+    <div class="flex items-center space-x-6">
+      <div class="flex items-center space-x-4">
+        <a href = "comunity.html" style="font-family: Times New Roman, Times, serif;" class="text-lg">Cộng đồng</a>
+        <a href="tuyenSinh.html" style="font-family: Times New Roman, Times, serif;" class="text-lg">Thông tin tuyển sinh</a>
+        <a href="toHopMon.html" class="text-lg" style="font-family: Times New Roman, Times, serif;" >Tổ hợp môn</a>
+        <div class="dropdown">
+          <span style="font-family: Times New Roman, Times, serif;" class="text-lg">Tự luyện</span>
+          <div class="dropdown-content">
+              <div class="class-option">
+                  <a href="tuLuyen.html">Lớp 10</a>
+              </div>
+              <div class="class-option">
+                  <a href="tuLuyen.html">Lớp 11</a>
+              </div>
+              <div class="class-option">
+                  <a href="#">Lớp 12</a>
+              </div>
+          </div>
+      </div>
+        <div><img src="globe.jpg" alt="" class="w-7"></div>
+        <button class="text-black text-lg" style="font-family: Times New Roman, Times, serif;" class="text-lg">English</button>
+      <div class="flex items-center space-x-2">
+        <img src="avatar4.jpg" alt="User Avatar" class="w-8 h-8 rounded-full">
+        <div class="relative group">
+          <p class="cursor-pointer" style="font-family: Times New Roman, Times, serif;" class="text-lg">user.name</p>
+          <div class="user-dropdown">
+            <a href="#" class="user-dropdown-item font-medium text-black">Xem trang cá nhân</a>
+            <a href="#" class="user-dropdown-item">
+              Điểm của bạn
+            </a>
+            <a href="#" class="user-dropdown-item">
+              Định Hướng
+            </a>
+            <a href="#" class="user-dropdown-item">
+              Đóng góp ý kiến
+            </a>
+            <a href="#" class="user-dropdown-item">
+              Đăng xuất
+            </a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="relative h-[calc(130vh-80px)]"> <!-- Adjust height to fit below navbar -->
+    <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
+      <source src="video1.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
   </div>
 
-  <div class="container">
-    <!-- Featured Article with Overlay Text -->
-    <div class="featured-article">
-      <img src="toHop.jpg" alt="Featured Content">
+  <section class="relative flex items-center justify-center pt-20 " style="height: 90vh"> <!-- Set height to full screen -->
+    <img src="3dStair.jpg" alt="Staircase" class="staircase w-[400px]">
+    <img src="3dDoor.jpg" alt="Door" class="door w-[200px]">
+    <div class="text-center relative z-10 welcome-text">
+      <h1 class="relative text-8xl opacity-75 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-gray-500 to-black welcome-heading">
+        WELCOME
+      </h1>
+      <p class="relative mt-4 text-lg text-gray-800 font-semibold" style="font-family: Times New Roman, Times, serif;">We are here to help you achieve your dreams</p>
+    </div>
+  </section>
+
+  <div class="flex justify-center mb-6 mt-0">
+    <img src="loading.png" alt="Loading" class="w-full h-16"> <!-- Adjust width and height as needed -->
+  </div>
+
+
+<div class="flex items-center mb-9">
+  <img src="news.jpg" class="ml-9 w-6">
+  <p class="font-extrabold text-3xl ml-2" style="font-family: Times New Roman, Times, serif;">
+    Tin tức
+  </p>
+</div>
+
+
+  <div class="grid grid-cols-2 gap-8 px-8 mb-8">
+    <!-- News Item 1 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="news1.jpg" alt="News 1" class="w-full h-64 object-cover">
+      <div class="p-4">
+        <h3 class="text-xl font-bold text-blue-600 mb-2">
+          <a href="https://laodongthudo.vn/tuyen-sinh-dai-hoc-nam-2025-thay-doi-de-thich-ung-178062.html" target="_blank">Tuyển sinh đại học năm 2025: Thay đổi để thích ứng</a>
+        </h3>
+        <p class="text-gray-600 mb-4">Năm 2025 đánh dấu bước ngoặt quan trọng của ngành Giáo dục và Đào tạo khi có lứa học sinh đầu tiên tốt nghiệp trung học phổ thông (THPT) theo Chương trình giáo dục phổ thông 2018. Chính vì vậy...</p>
+        <a href="https://laodongthudo.vn/tuyen-sinh-dai-hoc-nam-2025-thay-doi-de-thich-ung-178062.html" target="_blank" class="text-blue-500 hover:underline">Xem thêm</a>
+      </div>
     </div>
 
-    <!-- Sidebar Articles -->
-    <div class="sidebar">
-      <div class="article">
-        <h3><a href="https://baotintuc.vn/giao-duc/truong-dai-hoc-giam-chi-tieu-diem-thi-tot-nghiep-thpt-tang-xet-tuyen-rieng-20240919173625781.htm">Trường đại học giảm chỉ tiêu điểm thi tốt nghiệp THPT, tăng xét tuyển riêng</a></h3>
-        <span>Tech</span>
+    <!-- News Item 2 -->
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+      <img src="news2.jpg" alt="News 2" class="w-full h-64 object-cover">
+      <div class="p-4">
+        <h3 class="text-xl font-bold text-blue-600 mb-2">
+          <a href="https://baochinhphu.vn/lien-thong-dao-tao-giua-cac-cap-hoc-tao-thuan-loi-cho-nguoi-hoc-nang-cao-trinh-do-102240930095901315.htm" target="_blank">Liên thông đào tạo giữa các cấp học, tạo thuận lợi cho người học nâng cao trình độ</a>
+        </h3>
+        <p class="text-gray-600 mb-4">Bộ Giáo dục và Đào tạo đang lấy ý kiến góp ý với dự thảo Nghị định quy định về liên thông giữa các cấp học, trình độ đào tạo trong hệ thống giáo dục quốc dân....</p>
+        <a href="https://baochinhphu.vn/lien-thong-dao-tao-giua-cac-cap-hoc-tao-thuan-loi-cho-nguoi-hoc-nang-cao-trinh-do-102240930095901315.htm" target="_blank" class="text-blue-500 hover:underline">Xem thêm</a>
       </div>
-      <div class="article">
-        <h3><a href="https://plo.vn/nhung-diem-moi-trong-tuyen-sinh-dai-hoc-nam-2025-post809801.html">Những điểm mới trong tuyển sinh đại học năm 2025</a></h3>
-        <span>Cars</span>
-      </div>
-      <div class="article">
-        <h3><a href="https://hanoimoi.vn/tuyen-sinh-dai-hoc-nam-2025-hoc-sinh-chu-dong-nam-bat-nhung-dieu-chinh-moi-679220.html">Học sinh chủ động nắm bắt những điều chỉnh mới</a></h3>
-        <span>Tech</span>
-      </div>
-      <div class="article">
-        <h3><a href="https://baochinhphu.vn/lien-thong-dao-tao-giua-cac-cap-hoc-tao-thuan-loi-cho-nguoi-hoc-nang-cao-trinh-do-102240930095901315.htm">Liên thông đào tạo giữa các cấp học, tạo thuận lợi cho người học nâng cao trình độ</a></h3>
-        <span>Tech</span>
-      </div>
-      <div class="article">
-        <h3><a href="https://vtcnews.vn/nhieu-truong-dai-hoc-xet-tuyen-bo-sung-den-het-thang-9-ar897615.html">Nhiều trường đại học xét tuyển bổ sung đến hết tháng 9</a></h3>
-        <span>Tech</span>
     </div>
   </div>
+
+  <div class="flex justify-center mb-6 mt-0">
+    <img src="loading.png" alt="Loading" class="w-full h-16"> <!-- Adjust width and height as needed -->
+  </div>
+  
+  <div class="carousel-container relative w-full my-8 overflow-hidden">
+    <img src="tuyensinh1.jpg" alt="Description of the image" class="carousel-image w-full" style="object-fit: cover;" id="carousel-image">
+    <button id="prev" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg">
+        &#10094; <!-- Left Arrow -->
+    </button>
+    <button id="next" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-lg">
+        &#10095; <!-- Right Arrow -->
+    </button>
+</div>
+
+<div class="flex justify-center mb-6 mt-0">
+  <img src="loading.png" alt="Loading" class="w-full h-16"> <!-- Adjust width and height as needed -->
+</div>
+
+  <div class="access-counter text-center py-4 bg-gray-100">
+    <h2 class="text-lg font-semibold">NHỮNG CON SỐ THỐNG KÊ</h2>
+    <div class="grid grid-cols-3 gap-4 mt-4">
+      <div>
+        <h3 class="text-2xl font-bold text-black">35</h3>
+        <p class="text-gray-600">Số lượng người đã truy cập</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-black">11</h3>
+        <p class="text-gray-600">Số lượng người đã truy cập trong tháng</p>
+      </div>
+      <div>
+        <h3 class="text-2xl font-bold text-black">3</h3>
+        <p class="text-gray-600">Số lượng người đang truy cập</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="ai-chat-box" class="fixed bottom-4 right-4 w-70 bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="bg-black text-white p-3 flex justify-between items-center cursor-pointer" id="toggle-chat">
+      <h3 class="font-semibold">AI Assistant</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+    </div>
+    <div id="chat-content" class="h-80 overflow-y-auto p-4">
+      <!-- Chat messages will be appended here -->
+    </div>
+    <div id="chat-input" class="border-t p-3">
+      <form id="chat-form" class="flex">
+        <input type="text" id="user-input" class="flex-grow px-3 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Type your message...">
+        <button type="submit" class="bg-black text-white px-3 py-2 rounded-r-lg hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-purple-400">Send</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="bg-[#14295E] text-white py-12">
+    <div class="container mx-auto px-8">
+      <!-- Logo and Contact Info -->
+      <div class="grid grid-cols-4 gap-8">
+        <!-- Column 1: Logo and Contact -->
+        <div class="col-span-1">
+          <div class="mb-4">
+            <div class="flex items-center justify-center"> <!-- Center the logo and Edu4u -->
+              <div class="relative flex flex-col items-center mr-4">
+                <img src="logo.jpg" alt="Logo" class="w-14">
+              </div>
+              <div class="font-bold text-xl mt-1" style="font-family: Times New Roman, Times, serif;">Edu4u</div> <!-- Edu4u text -->
+            </div>
+            <p class="text-lg font-semibold text-white leading-tight mt-1 text-center" style="font-family: Times New Roman, Times, serif;"> <!-- Centered slogan -->
+              Đổi mới sáng tạo, nâng cao chất lượng, đoàn kết kỳ cương
+            </p>
+          </div>
+        
+          <div class="flex flex-col mt-9"> <!-- Flex column for additional content -->
+            <div class=" text-white text-sm" style="font-family: Times New Roman, Times, serif;"> <!-- Example content -->
+              <p class="mb-2">THPT chuyên Lý Tự Trọng - Phường Hưng Thạnh, Quận Cái Răng, TP. Cần Thơ</p>
+              <p class="mb-2">Điện thoại: 0292.3821.428</p>
+              <p class="mb-2">THPT Châu Văn Liêm - 58 Ngô Quyền, An Cư, Quận Ninh Kiều, TP. Cần Thơ</p>
+              <p class="mb-2">Điện thoại: 0292.382.1330</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+    </div>
+
+
+  </footer>
+
+  <script>
+  const toggleChat = document.getElementById('toggle-chat');
+  const chatContent = document.getElementById('chat-content');
+  const chatInput = document.getElementById('chat-input');
+
+  // Initially hide chat content and input
+  chatContent.style.display = 'block'; // Change to 'none' if you want it hidden initially
+  chatInput.style.display = 'flex'; // Change to 'none' if you want it hidden initially
+
+  toggleChat.addEventListener('click', () => {
+    const isVisible = chatContent.style.display !== 'none';
+    chatContent.style.display = isVisible ? 'none' : 'block';
+    chatInput.style.display = isVisible ? 'none' : 'flex'; // Hide input when closed
+  });
+
+  function appendMessage(sender, text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `mb-2 ${sender === 'user' ? 'text-right' : 'text-left'}`;
+    messageDiv.innerHTML = `
+      <span class="inline-block px-3 py-2 rounded-lg ${sender === 'user' ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-800'}">
+        ${text}
+      </span>
+    `;
+    chatContent.appendChild(messageDiv);
+    chatContent.scrollTop = chatContent.scrollHeight;
+  }
+
+  function appendOption(text, response) {
+    const button = document.createElement('button');
+    button.className = 'block text-right ml-auto px-3 py-2 mt-2 bg-gray-100 hover:bg-gray-200 rounded-lg';
+    button.textContent = text;
+    button.onclick = () => {
+      appendMessage('user', text);
+      appendMessage('ai', response);
+    };
+    chatContent.appendChild(button);
+  }
+
+  // Automatically greet users and provide example questions
+  window.onload = function() {
+    appendMessage('ai', 'Chào! Chúng tôi có thể giúp gì cho bạn?');
+    appendOption('Chúng tôi là ai?', 'Chúng tôi là một tổ chức giáo dục.');
+    appendOption('Vì sao chúng tôi lại ở đây?', 'Chúng tôi ở đây để hỗ trợ bạn.');
+  };
+
+    const images = [
+      'tuyensinh1.jpg',
+      'tuyensinh2.jpg',
+      'tuyensinh3.jpg',
+      'tuyensinh4.jpg',
+    ];
+let currentIndex = 0;
+let interval;
+
+const carouselImage = document.getElementById('carousel-image');
+
+// Function to update the image with transition
+function updateImage(direction) {
+    const newIndex = (currentIndex + direction + images.length) % images.length;
+
+    // Clone the current image for a smooth transition
+    const clone = carouselImage.cloneNode();
+    clone.src = images[newIndex];
+    clone.style.position = 'absolute';
+    clone.style.top = '0';
+    clone.style.left = `${direction * 100}%`;
+    clone.style.transition = 'transform 0.5s ease-in-out';
+
+    carouselImage.parentNode.appendChild(clone);
+
+    setTimeout(() => {
+        clone.style.transform = 'translateX(-100%)';
+        carouselImage.style.transform = `translateX(-100%)`;
+    }, 50);
+
+    setTimeout(() => {
+        carouselImage.src = images[newIndex];
+        carouselImage.style.transition = 'none';
+        carouselImage.style.transform = 'translateX(0)';
+        clone.remove();
+    }, 550);
+
+    currentIndex = newIndex;
+}
+
+// Function to start the interval
+function startInterval() {
+    interval = setInterval(() => {
+        updateImage(1); // Automatically move left to right
+    }, 4000);
+}
+
+// Event listener for the next button
+document.getElementById('next').addEventListener('click', () => {
+    clearInterval(interval); // Clear existing interval
+    updateImage(1); // Move left to right
+    startInterval(); // Restart interval
+});
+
+// Event listener for the previous button
+document.getElementById('prev').addEventListener('click', () => {
+    clearInterval(interval); // Clear existing interval
+    updateImage(-1); // Move right to left
+    startInterval(); // Restart interval
+});
+
+// Start the interval initially
+startInterval();
+  </script>
+
+
 </body>
 </html>
