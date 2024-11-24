@@ -383,31 +383,49 @@
   </footer>
 
   <script>
-     const toggleChat = document.getElementById('toggle-chat');
-    const chatContent = document.getElementById('chat-content');
-    const chatInput = document.getElementById('chat-input');
+  const toggleChat = document.getElementById('toggle-chat');
+  const chatContent = document.getElementById('chat-content');
+  const chatInput = document.getElementById('chat-input');
 
   // Initially hide chat content and input
-    chatContent.style.display = 'block'; // Change to 'none' if you want it hidden initially
-    chatInput.style.display = 'flex'; // Change to 'none' if you want it hidden initially
+  chatContent.style.display = 'block'; // Change to 'none' if you want it hidden initially
+  chatInput.style.display = 'flex'; // Change to 'none' if you want it hidden initially
 
-    toggleChat.addEventListener('click', () => {
+  toggleChat.addEventListener('click', () => {
     const isVisible = chatContent.style.display !== 'none';
     chatContent.style.display = isVisible ? 'none' : 'block';
     chatInput.style.display = isVisible ? 'none' : 'flex'; // Hide input when closed
   });
 
-    function appendMessage(sender, text) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `mb-2 ${sender === 'user' ? 'text-right' : 'text-left'}`;
-      messageDiv.innerHTML = `
-        <span class="inline-block px-3 py-2 rounded-lg ${sender === 'user' ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-800'}">
-          ${text}
-        </span>
-      `;
-      chatContent.appendChild(messageDiv);
-      chatContent.scrollTop = chatContent.scrollHeight;
-    }
+  function appendMessage(sender, text) {
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `mb-2 ${sender === 'user' ? 'text-right' : 'text-left'}`;
+    messageDiv.innerHTML = `
+      <span class="inline-block px-3 py-2 rounded-lg ${sender === 'user' ? 'bg-blue-100 text-blue-800' : 'bg-gray-200 text-gray-800'}">
+        ${text}
+      </span>
+    `;
+    chatContent.appendChild(messageDiv);
+    chatContent.scrollTop = chatContent.scrollHeight;
+  }
+
+  function appendOption(text, response) {
+    const button = document.createElement('button');
+    button.className = 'block text-right ml-auto px-3 py-2 mt-2 bg-gray-100 hover:bg-gray-200 rounded-lg';
+    button.textContent = text;
+    button.onclick = () => {
+      appendMessage('user', text);
+      appendMessage('ai', response);
+    };
+    chatContent.appendChild(button);
+  }
+
+  // Automatically greet users and provide example questions
+  window.onload = function() {
+    appendMessage('ai', 'Chào! Chúng tôi có thể giúp gì cho bạn?');
+    appendOption('Chúng tôi là ai?', 'Chúng tôi là một tổ chức giáo dục.');
+    appendOption('Vì sao chúng tôi lại ở đây?', 'Chúng tôi ở đây để hỗ trợ bạn.');
+  };
 
     const images = [
       'tuyensinh1.jpg',
