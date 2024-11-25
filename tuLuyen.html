@@ -23,7 +23,6 @@
                 </div>
             </nav>
             <div class="flex items-center space-x-4">
-                <button class="bg-blue-500 px-3 py-1 rounded-md">Donate</button>
                 <span>user.name</span>
             </div>
         </div>
@@ -48,31 +47,57 @@
         const courses = [
             {
                 grade: "1",
-                title: "Chương 1: Lượng giác",
+                title: "Chương 1: HÀM SỐ LƯỢNG GIÁC VÀ PHƯƠNG TRÌNH LƯỢNG GIÁC",
                 topics: [
-                    "Get ready for addition and subtraction",
-                    "Get ready for multiplication and division",
-                    "Get ready for fractions",
-                    "Get ready for patterns and problem solving",
-                    "Get ready for area and perimeter",
-                    "Get ready for telling time",
-                    "Get ready for data"
+                    "Bài 1. Góc lượng giác",
+                    "Bài 2. Giá trị lượng giác của một góc lượng giác",
+                    "Bài 3. Các công thức lượng giác",
+                    "Bài 4. Hàm số lượng giác và đồ thị",
+                    "Bài 5. Phương trình lượng giác cơ bản",
+                    "Bài tập cuối chương 1",
                 ]
             },
             {
                 grade: 2,
-                title: "Chương 2: Dãy số, Cấp số",
+                title: "Chương 2: DÃY SỐ. CẤP SỐ CỘNG. CẤP SỐ NHÂN.",
                 topics: [
-                    "Get ready for place value",
-                    "Get ready for addition, subtraction, and estimation",
-                    "Get ready for multiplication",
-                    "Get ready for division",
-                    "Get ready for fractions",
-                    "Get ready for plane figures",
-                    "Get ready for area and perimeter"
+                    "Bài 1. Dãy số",
+                    "Bài 2. Cấp số cộng",
+                    "Bài 3. Cấp số nhân",
+                    "Bài tập cuối chương II",
                 ]
             },
-
+            {
+                grade: 3,
+                title: "Chương 3: GIỚI HẠN. HÀM SỐ LIÊN TỤC",
+                topics: [
+                    "Bài 1. Giới hạn của dãy số",
+                    "Bài 2. Giới hạn của hàm số",
+                    "Bài 3. Hàm số liên tục",
+                    "Bài tập cuối chương III",
+                ]
+            },
+            {
+                grade: 4,
+                title: "Chương 4: ĐƯỜNG THẲNG VÀ MẶT PHẲNG. QUAN HỆ SONG SONG TRONG KHÔNG GIAN.",
+                topics: [
+                    "Bài 1. Điểm, đường thẳng và mặt phẳng trong không gian",
+                    "Bài 2. Hai đường thẳng song song",
+                    "Bài 3. Đường thẳng và mặt phẳng song song",
+                    "Bài 4. Hai mặt phẳng song song",
+                    "Bài 5. Phép chiếu song song",
+                    "Bài tập cuối chương IV",
+                ]
+            },
+            {
+                grade: 5,
+                title: "Chương 5: CÁC SỐ ĐẶC TRƯNG ĐO XU THẾ TRUNG TÂM CHO MẪU SỐ LIỆU GHÉP NHÓM.",
+                topics: [
+                    "Bài 1. Số trung bình và mốt của mẫu số liệu ghép nhóm",
+                    "Bài 2. Trung vị và tứ phân vị của mẫu số liệu ghép nhóm",
+                    "Bài tập cuối chương V",
+                ]
+            },
         ];
 
         const courseSummary = document.getElementById('courseSummary');
@@ -84,9 +109,7 @@
         });
 
 
-        ['3', '4', '5', '6'].forEach(grade => {
-            courseSummary.innerHTML += `<li class="cursor-pointer hover:text-blue-600">Chương ${grade}</li>`;
-        });
+
 
 
         courses.forEach(course => {
