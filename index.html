@@ -195,11 +195,11 @@
     </div>
     <div class="flex items-center space-x-6">
       <div class="flex items-center space-x-4">
-        <a href = "comunity.html" style="font-family: Times New Roman, Times, serif;" class="text-lg">Cộng đồng</a>
-        <a href="tuyenSinh.html" style="font-family: Times New Roman, Times, serif;" class="text-lg">Thông tin tuyển sinh</a>
-        <a href="toHopmon.html" class="text-lg" style="font-family: Times New Roman, Times, serif;" >Tổ hợp môn</a>
+        <a href = "comunity.html" style="font-family: Times New Roman, Times, serif;" class="text-lg font-semibold">Cộng đồng</a>
+        <a href="tuyenSinh.html" style="font-family: Times New Roman, Times, serif;" class="text-lg font-semibold">Thông tin tuyển sinh</a>
+        <a href="toHopmon.html" class="text-lg font-semibold" style="font-family: Times New Roman, Times, serif;" >Tổ hợp môn</a>
         <div class="dropdown">
-          <span style="font-family: Times New Roman, Times, serif;" class="text-lg">Tự luyện</span>
+          <span style="font-family: Times New Roman, Times, serif;" class="text-lg font-semibold">Tự luyện</span>
           <div class="dropdown-content">
               <div class="class-option">
                   <a href="tuLuyen.html">Lớp 10</a>
@@ -213,7 +213,7 @@
           </div>
       </div>
         <div><img src="globe.jpg" alt="" class="w-7"></div>
-        <button class="text-black text-lg" style="font-family: Times New Roman, Times, serif;" class="text-lg">English</button>
+        <button class="text-black text-lg font-semibold" style="font-family: Times New Roman, Times, serif;">English</button>
       <div class="flex items-center space-x-2">
         <img src="avatar4.jpg" alt="User Avatar" class="w-8 h-8 rounded-full">
         <div class="relative group">
@@ -312,23 +312,23 @@
   <img src="loading.png" alt="Loading" class="w-full h-16"> <!-- Adjust width and height as needed -->
 </div>
 
-  <div class="access-counter text-center py-4 bg-gray-100">
-    <h2 class="text-lg font-semibold">NHỮNG CON SỐ THỐNG KÊ</h2>
-    <div class="grid grid-cols-3 gap-4 mt-4">
-      <div>
-        <h3 class="text-2xl font-bold text-black">35</h3>
-        <p class="text-gray-600">Số lượng người đã truy cập</p>
-      </div>
-      <div>
-        <h3 class="text-2xl font-bold text-black">11</h3>
-        <p class="text-gray-600">Số lượng người đã truy cập trong tháng</p>
-      </div>
-      <div>
-        <h3 class="text-2xl font-bold text-black">3</h3>
-        <p class="text-gray-600">Số lượng người đang truy cập</p>
-      </div>
+<div id="stats-section" class="access-counter text-center py-4 bg-gray-100">
+  <h2 class="text-lg font-semibold">NHỮNG CON SỐ THỐNG KÊ</h2>
+  <div class="grid grid-cols-3 gap-4 mt-4">
+    <div>
+      <h3 id="student-count" class="text-2xl font-bold text-black">0</h3>
+      <p class="text-gray-600">Số lượng người đã truy cập</p>
+    </div>
+    <div>
+      <h3 id="postgraduate-count" class="text-2xl font-bold text-black">0</h3>
+      <p class="text-gray-600">Số lượng người đã truy cập trong tháng</p>
+    </div>
+    <div>
+      <h3 id="professor-count" class="text-2xl font-bold text-black">0</h3>
+      <p class="text-gray-600">Số lượng người đang truy cập</p>
     </div>
   </div>
+</div>
 
   <div id="ai-chat-box" class="fixed bottom-4 right-4 w-70 bg-white rounded-lg shadow-lg overflow-hidden">
     <div class="bg-black text-white p-3 flex justify-between items-center cursor-pointer" id="toggle-chat">
@@ -490,6 +490,38 @@ document.getElementById('prev').addEventListener('click', () => {
 
 // Start the interval initially
 startInterval();
+
+    function animateNumber(elementId, targetNumber) {
+        let currentNumber = 0;
+        const increment = Math.ceil(targetNumber / 100); // Adjust increment for speed
+        const element = document.getElementById(elementId);
+
+        const interval = setInterval(() => {
+            currentNumber += increment;
+            if (currentNumber >= targetNumber) {
+                currentNumber = targetNumber; // Ensure it doesn't exceed the target
+                clearInterval(interval);
+            }
+            element.textContent = currentNumber;
+        }, 35); // Adjust the interval for speed
+    }
+
+    // Intersection Observer to trigger animation
+    const statsSection = document.getElementById('stats-section');
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true; // Prevent multiple animations
+                animateNumber('student-count', 42);
+                animateNumber('postgraduate-count', 23);
+                animateNumber('professor-count', 4);
+            }
+        });
+    }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+    observer.observe(statsSection);
   </script>
 
 
