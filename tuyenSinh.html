@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Website</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.header {
+    background: #004080;
+    color: white;
+    padding: 1rem 0;
+}
+
+
+.header .nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.header .nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
+.header .nav ul li a:hover {
+    background: #002a5c;
+    border-radius: 5px;
+}
+
+/* Main Content */
+.main-content {
+    padding: 2rem 0;
+}
+
+.featured-article {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.featured-article img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.featured-article h2 {
+    font-size: 2rem;
+    margin: 1rem 0;
+}
+
+.featured-article .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: white;
+    background: #004080;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.featured-article .read-more:hover {
+    background: #002a5c;
+}
+
+/* News Grid */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.news-card {
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.news-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.news-card h3 {
+    margin: 1rem 0 0.5rem;
+}
+
+.news-card .read-more {
+    display: inline-block;
+    margin-top: 1rem;
+    color: white;
+    background: #004080;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.news-card .read-more:hover {
+    background: #002a5c;
+}
+
+/* Footer */
+.footer {
+    background: #004080;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-weight:600;
+    font-size: medium;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo" style="display: flex; align-items: center; font-size:large"> <!-- Added flex display -->
+                <img src="logo.jpg" alt="Logo" style="width: 48px; height: 48px; margin-right: 8px;"> <!-- Set logo size and margin -->
+                Thông tin tuyển sinh - Tin tức
+            </h1>
+            <nav class="nav">
+
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <section class="news-grid">
+                <article class="news-card">
+                    <img src="news4.jpg" alt="News">
+                    <h3>Áp chỉ tiêu xét tuyển sớm dưới 20%: Nhiều trường than khó</h3>
+                    <p>Theo Vụ trưởng Vụ Giáo dục Đại học, Bộ GD&ĐT, vấn đề giới hạn các...</p>
+                    <a href="https://www.nguoiduatin.vn/ap-chi-tieu-xet-tuyen-som-duoi-20-nhieu-truong-than-kho-20424112614502345.htm" class="read-more">Read More</a>
+                </article>
+                <article class="news-card">
+                    <img src="news5.jpg" alt="News">
+                    <h3>Năm 2025, thí sinh đăng ký xét tuyển ĐH sau khi có kết quả thi tốt nghiệp THPT</h3>
+                    <p>Thí sinh đăng ký xét tuyển đại học sau khi có kết quả thi tốt...</p>
+                    <a href="https://hanoimoi.vn/nam-2025-thi-sinh-dang-ky-xet-tuyen-dh-sau-khi-co-ket-qua-thi-tot-nghiep-thpt-685431.html" class="read-more">Read More</a>
+                </article>
+                <article class="news-card">
+                    <img src="news3.jpg" alt="News">
+                    <h3>Nhiều thay đổi trong tuyển sinh đại học năm 2025: Cẩn trọng khi đăng ký xét tuyển</h3>
+                    <p>Năm 2025, lứa học sinh đầu tiên theo Chương trình giáo dục phổ...</p>
+                    <a href="https://hanoimoi.vn/nhieu-thay-doi-trong-tuyen-sinh-dai-hoc-nam-2025-can-trong-khi-dang-ky-xet-tuyen-685679.html" class="read-more">Read More</a>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="col-span-1">
+                <div class="mb-4">
+                  <div class="flex items-center justify-center"> <!-- Center the logo and Edu4u -->
+                    <div class="relative flex flex-col items-center mr-4">
+                      <img src="logo.jpg" alt="Logo" style="width: 48px; height: 48px;">
+                    </div>
+                    <div class="font-bold text-xl mt-1" style="font-family: Times New Roman, Times, serif;">Edu4u</div> <!-- Edu4u text -->
+                  </div>
+                  <p class="text-lg font-semibold text-white leading-tight mt-1 text-center" style="font-family: Times New Roman, Times, serif;"> <!-- Centered slogan -->
+                    Đổi mới sáng tạo, nâng cao chất lượng, đoàn kết kỳ cương
+                  </p>
+                </div>
+              
+                <div class="flex flex-col mt-9"> <!-- Flex column for additional content -->
+                  <div class=" text-white text-sm" style="font-family: Times New Roman, Times, serif;"> <!-- Example content -->
+                    <p class="mb-2">THPT chuyên Lý Tự Trọng - Phường Hưng Thạnh, Quận Cái Răng, TP. Cần Thơ</p>
+                    <p class="mb-2">Điện thoại: 0292.3821.428</p>
+                    <p class="mb-2">THPT Châu Văn Liêm - 58 Ngô Quyền, An Cư, Quận Ninh Kiều, TP. Cần Thơ</p>
+                    <p class="mb-2">Điện thoại: 0292.382.1330</p>
+                  </div>
+                </div>
+              </div>
+              </div>
+        </div>
+    </footer>
+</body>
+</html>
